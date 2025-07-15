@@ -1,0 +1,180 @@
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 200px; // Width of the Ant Design Sider
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s cubic-bezier(0.2, 0, 0, 1) 0s;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+
+    .logo {
+        h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #1890ff;
+        }
+    }
+
+    .search-container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        padding: 0 24px;
+        max-width: 600px;
+        margin: 0 auto;
+
+        .search-wrapper {
+            width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            .search-input {
+                width: 100%;
+                padding: 0.75rem 1rem;
+                padding-right: 3rem;
+                border: 1px solid #e8e8e8;
+                border-radius: 8px;
+                font-size: 1rem;
+                outline: none;
+                background: #fff;
+                color: #333;
+                transition: all 0.3s ease;
+
+                &:focus {
+                    border-color: #1890ff;
+                    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+                }
+
+                &::placeholder {
+                    color: #999;
+                }
+            }
+
+            .search-button {
+                position: absolute;
+                right: 8px;
+                background: none;
+                border: none;
+                color: #999;
+                cursor: pointer;
+                padding: 8px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    color: #1890ff;
+                    background: rgba(24, 144, 255, 0.1);
+                }
+            }
+        }
+    }
+
+    .right-actions {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+
+        .anticon {
+            color: #666;
+            cursor: pointer;
+            transition: color 0.3s;
+
+            &:hover {
+                color: #1890ff;
+            }
+        }
+
+        .notification-icon-wrapper {
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            padding: 4px;
+            border-radius: 50%;
+
+            &:hover {
+                transform: scale(1.05);
+            }
+        }
+
+        .avatar-wrapper {
+            cursor: pointer;
+            transition: transform 0.2s ease;
+
+            &:hover {
+                transform: scale(1.05);
+            }
+        }
+    }
+}
+
+// Adjust layout when Sider is collapsed
+.ant-layout-sider-collapsed+.ant-layout {
+    .site-header {
+        left: 80px; // Width of collapsed Sider
+        transition: all 0.2s cubic-bezier(0.2, 0, 0, 1) 0s;
+    }
+}
+
+// Avatar dropdown menu styles
+.avatar-dropdown {
+    min-width: 200px;
+    padding: 8px 0;
+
+    .user-info {
+        padding: 12px 16px;
+        border-bottom: 1px solid #f0f0f0;
+        margin-bottom: 8px;
+
+        .username {
+            font-weight: 500;
+            color: #262626;
+            margin-bottom: 4px;
+        }
+
+        .user-handle {
+            color: #8c8c8c;
+            font-size: 12px;
+        }
+    }
+
+    .menu-item {
+        padding: 8px 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #595959;
+        transition: all 0.3s ease;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #f5f5f5;
+            color: #1890ff;
+        }
+
+        &.danger {
+            color: #ff4d4f;
+
+            &:hover {
+                background-color: #fff1f0;
+                color: #ff4d4f;
+            }
+        }
+    }
+}
+
+// Notification dropdown overlay styles
+.notification-dropdown-overlay {
+    .ant-dropdown {
+        padding: 0;
+    }
+}

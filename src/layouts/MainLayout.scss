@@ -1,0 +1,134 @@
+.main-layout {
+    min-height: 100vh;
+
+    .ant-layout-sider {
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        overflow: hidden;
+        z-index: 1000;
+
+        .sider-content {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+
+            .ant-menu {
+                flex: 1;
+                overflow: hidden;
+                border-right: none;
+
+                // Custom scrollbar cho menu nếu cần
+                &::-webkit-scrollbar {
+                    width: 0;
+                    background: transparent;
+                }
+
+                .ant-menu-item {
+                    margin: 0;
+                    border-radius: 0;
+
+                    &:hover {
+                        background-color: rgba(255, 255, 255, 0.1);
+                    }
+
+                    &.ant-menu-item-selected {
+                        background-color: #1890ff;
+                    }
+                }
+            }
+        }
+    }
+
+    .main-content {
+        margin-left: 200px;
+        transition: margin-left 0.2s cubic-bezier(0.2, 0, 0, 1) 0s;
+
+        &.collapsed {
+            margin-left: 80px;
+        }
+
+        .ant-layout-content {
+            margin: 88px 16px 0;
+            // padding: 24px;
+            min-height: 360px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .ant-layout-footer {
+            text-align: center;
+            background: #f0f2f5;
+            color: #666;
+            font-size: 14px;
+        }
+    }
+
+    // Responsive design
+    @media (max-width: 768px) {
+        .ant-layout-sider {
+            position: fixed;
+            z-index: 1001;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+
+            &.ant-layout-sider-collapsed {
+                transform: translateX(0);
+            }
+        }
+
+        .main-content {
+            margin-left: 0 !important;
+
+            &.collapsed {
+                margin-left: 0 !important;
+            }
+        }
+    }
+
+    // Dark mode support
+    @media (prefers-color-scheme: dark) {
+        .main-content {
+            .ant-layout-content {
+                // background: #1f1f1f;
+                color: #fff;
+            }
+
+            .ant-layout-footer {
+                // background: #141414;
+                color: #585858;
+            }
+        }
+    }
+}
+
+// Filter drawer styles
+.ant-drawer {
+    .ant-drawer-content-wrapper {
+        .ant-drawer-content {
+            .ant-drawer-header {
+                background: #fafafa;
+                border-bottom: 1px solid #f0f0f0;
+
+                .ant-drawer-title {
+                    font-weight: 600;
+                    color: #262626;
+                }
+            }
+
+            .ant-drawer-body {
+                padding: 0;
+                overflow: hidden;
+            }
+        }
+    }
+}
+
+// Chat box z-index
+.chat-box-container {
+    z-index: 1002;
+}

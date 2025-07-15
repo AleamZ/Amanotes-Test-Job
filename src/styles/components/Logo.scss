@@ -1,0 +1,16 @@
+.logo-container {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #001529;
+    padding: 16px;
+
+    h3.ant-typography {
+        color: #fff !important;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

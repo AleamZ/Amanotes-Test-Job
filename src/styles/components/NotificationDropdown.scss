@@ -1,0 +1,193 @@
+.notification-dropdown {
+    width: 380px;
+    max-height: 500px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+
+    .notification-header {
+        padding: 16px 20px;
+        border-bottom: 1px solid #f0f0f0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #fafafa;
+
+        h4 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: #262626;
+        }
+
+        .mark-all-read {
+            padding: 0;
+            font-size: 12px;
+            color: #1890ff;
+
+            &:hover {
+                color: #40a9ff;
+            }
+        }
+    }
+
+    .notification-list {
+        max-height: 400px;
+        overflow-y: auto;
+
+        .notification-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #f5f5f5;
+            position: relative;
+
+            &:hover {
+                background-color: #f8f9fa;
+            }
+
+            &.unread {
+                background-color: #f6ffed;
+                border-left: 3px solid #52c41a;
+
+                &:hover {
+                    background-color: #f0f9ff;
+                }
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            .notification-avatar {
+                position: relative;
+
+                .notification-type-icon {
+                    position: absolute;
+                    bottom: -2px;
+                    right: -2px;
+                    background: #fff;
+                    border-radius: 50%;
+                    width: 18px;
+                    height: 18px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 10px;
+                    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+                }
+            }
+
+            .notification-content {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                margin-bottom: 4px;
+
+                .notification-title {
+                    font-weight: 500;
+                    color: #262626;
+                    font-size: 14px;
+                }
+
+                .ant-badge {
+                    .ant-badge-status-dot {
+                        width: 6px;
+                        height: 6px;
+                    }
+                }
+            }
+
+            .notification-details {
+                .notification-description {
+                    margin: 0;
+                    color: #595959;
+                    font-size: 13px;
+                    line-height: 1.4;
+                    margin-bottom: 4px;
+                }
+
+                .notification-time {
+                    color: #8c8c8c;
+                    font-size: 12px;
+                }
+            }
+
+            .mark-read-btn {
+                position: absolute;
+                top: 12px;
+                right: 16px;
+                color: #8c8c8c;
+                opacity: 0;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    color: #52c41a;
+                }
+            }
+
+            &:hover .mark-read-btn {
+                opacity: 1;
+            }
+        }
+
+        // Custom scrollbar
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: #f5f5f5;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: #d9d9d9;
+            border-radius: 3px;
+
+            &:hover {
+                background: #bfbfbf;
+            }
+        }
+    }
+
+    .notification-footer {
+        padding: 12px 20px;
+        border-top: 1px solid #f0f0f0;
+        background: #fafafa;
+
+        .ant-btn-link {
+            padding: 0;
+            font-size: 13px;
+            color: #1890ff;
+            font-weight: 500;
+
+            &:hover {
+                color: #40a9ff;
+            }
+        }
+    }
+}
+
+// Animation cho dropdown
+.notification-dropdown-enter {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.notification-dropdown-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.3s ease;
+}
+
+.notification-dropdown-exit {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.notification-dropdown-exit-active {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
