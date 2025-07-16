@@ -6,4 +6,9 @@ export interface Notification {
     avatar?: string;
     time: string;
     isRead: boolean;
-} 
+}
+export interface NotificationDropdownProps {
+    notifications: Notification[];
+    onMarkAsRead: (id: string) => void;
+    onMarkAllAsRead: () => void;
+}

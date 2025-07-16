@@ -744,4 +744,202 @@ export const levels = [
     'Beginner',
     'Intermediate',
     'Advanced'
+];
+
+// Dữ liệu cho các lộ trình học theo chuyên môn
+export interface LearningPath {
+    id: string;
+    title: string;
+    description: string;
+    image: string;
+    category: string;
+    duration: string;
+    difficulty: string;
+    salary: string;
+    courseCount: number;
+    courses: string[]; // IDs của các khóa học liên quan
+}
+
+export const learningPaths: LearningPath[] = [
+    {
+        id: 'frontend',
+        title: 'Lộ trình học Front-end',
+        description: 'Trở thành lập trình viên Front-end chuyên nghiệp với HTML, CSS, JavaScript và các framework hiện đại. Xây dựng giao diện web đẹp, responsive và tương tác.',
+        image: 'https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=400&h=300&fit=crop',
+        category: 'Programming',
+        duration: '6-8 tháng',
+        difficulty: 'Beginner to Intermediate',
+        salary: '15.000.000đ - 25.000.000đ/tháng',
+        courseCount: 8,
+        courses: ['1', '4', '25', '27', '36'] // IDs của các khóa học liên quan
+    },
+    {
+        id: 'backend',
+        title: 'Lộ trình học Back-end',
+        description: 'Phát triển ứng dụng Back-end với Node.js, Python, Java và các công nghệ server-side. Xây dựng API, database và hệ thống backend mạnh mẽ.',
+        image: 'https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=400&h=300&fit=crop',
+        category: 'Programming',
+        duration: '8-10 tháng',
+        difficulty: 'Intermediate to Advanced',
+        salary: '18.000.000đ - 35.000.000đ/tháng',
+        courseCount: 6,
+        courses: ['5', '16', '32', '41', '30']
+    },
+    {
+        id: 'fullstack',
+        title: 'Lộ trình học Full-stack',
+        description: 'Trở thành lập trình viên Full-stack với khả năng phát triển cả Front-end và Back-end. Xây dựng ứng dụng web hoàn chỉnh từ đầu đến cuối.',
+        image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop',
+        category: 'Programming',
+        duration: '10-12 tháng',
+        difficulty: 'Intermediate to Advanced',
+        salary: '20.000.000đ - 40.000.000đ/tháng',
+        courseCount: 10,
+        courses: ['1', '5', '16', '25', '32', '41']
+    },
+    {
+        id: 'data-science',
+        title: 'Lộ trình học Data Science',
+        description: 'Khám phá thế giới khoa học dữ liệu với Python, Machine Learning và AI. Phân tích dữ liệu, xây dựng mô hình và đưa ra quyết định dựa trên dữ liệu.',
+        image: 'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=400&h=300&fit=crop',
+        category: 'Data Science',
+        duration: '8-12 tháng',
+        difficulty: 'Intermediate to Advanced',
+        salary: '25.000.000đ - 50.000.000đ/tháng',
+        courseCount: 7,
+        courses: ['2', '7', '13', '23', '28', '39', '44']
+    },
+    {
+        id: 'mobile',
+        title: 'Lộ trình học Mobile Development',
+        description: 'Phát triển ứng dụng di động cho iOS và Android với React Native, Flutter và native development. Tạo ra ứng dụng mobile hiện đại và hiệu quả.',
+        image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=300&fit=crop',
+        category: 'Programming',
+        duration: '6-10 tháng',
+        difficulty: 'Intermediate',
+        salary: '18.000.000đ - 35.000.000đ/tháng',
+        courseCount: 5,
+        courses: ['12', '21', '36']
+    },
+    {
+        id: 'ui-ux',
+        title: 'Lộ trình học UI/UX Design',
+        description: 'Thiết kế giao diện và trải nghiệm người dùng chuyên nghiệp. Học cách tạo ra sản phẩm số đẹp, dễ sử dụng và thân thiện với người dùng.',
+        image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=300&fit=crop',
+        category: 'Design',
+        duration: '6-8 tháng',
+        difficulty: 'Beginner to Intermediate',
+        salary: '15.000.000đ - 30.000.000đ/tháng',
+        courseCount: 6,
+        courses: ['4', '9', '15', '19', '27', '31', '38', '42']
+    },
+    {
+        id: 'digital-marketing',
+        title: 'Lộ trình học Digital Marketing',
+        description: 'Làm chủ marketing số với SEO, Social Media, Content Marketing và Google Ads. Xây dựng chiến lược marketing hiệu quả cho doanh nghiệp.',
+        image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop',
+        category: 'Marketing',
+        duration: '4-6 tháng',
+        difficulty: 'Beginner to Intermediate',
+        salary: '12.000.000đ - 25.000.000đ/tháng',
+        courseCount: 6,
+        courses: ['3', '11', '24', '34', '40']
+    },
+    {
+        id: 'business',
+        title: 'Lộ trình học Business & Finance',
+        description: 'Phát triển kỹ năng kinh doanh, tài chính và quản lý. Học cách phân tích thị trường, quản lý dự án và đưa ra quyết định kinh doanh thông minh.',
+        image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop',
+        category: 'Business',
+        duration: '6-8 tháng',
+        difficulty: 'Beginner to Intermediate',
+        salary: '15.000.000đ - 35.000.000đ/tháng',
+        courseCount: 7,
+        courses: ['8', '14', '18', '26', '33', '37', '43']
+    },
+    {
+        id: 'languages',
+        title: 'Lộ trình học Ngoại ngữ',
+        description: 'Nâng cao kỹ năng ngoại ngữ cho công việc và giao tiếp quốc tế. Học tiếng Anh, tiếng Nhật, tiếng Hàn và các ngôn ngữ khác.',
+        image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400&h=300&fit=crop',
+        category: 'Language',
+        duration: '3-6 tháng',
+        difficulty: 'Beginner to Intermediate',
+        salary: 'Tăng 20-50% thu nhập',
+        courseCount: 6,
+        courses: ['6', '10', '20', '22', '29', '35', '45']
+    }
+];
+
+export interface Post {
+    id: string;
+    title: string;
+    thumbnail: string;
+    category: string;
+    author: string;
+    date: string;
+    excerpt: string;
+    content: string;
+}
+
+export const postCategories = [
+    'Tất cả',
+    'Lập trình',
+    'UI/UX',
+    'Kinh nghiệm',
+    'Học tập',
+    'Công nghệ',
+];
+
+export const posts: Post[] = [
+    {
+        id: '1',
+        title: '5 bước học React hiệu quả cho người mới',
+        thumbnail: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=250&fit=crop',
+        category: 'Lập trình',
+        author: 'Nguyễn Văn A',
+        date: '2024-06-01',
+        excerpt: 'Bạn muốn bắt đầu với React? Hãy tham khảo 5 bước học React hiệu quả cho người mới bắt đầu...',
+        content: 'Nội dung chi tiết bài viết về 5 bước học React hiệu quả cho người mới bắt đầu...'
+    },
+    {
+        id: '2',
+        title: 'Tư duy thiết kế UI/UX hiện đại',
+        thumbnail: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&h=250&fit=crop',
+        category: 'UI/UX',
+        author: 'Trần Thị B',
+        date: '2024-05-28',
+        excerpt: 'UI/UX là gì? Làm sao để thiết kế giao diện người dùng hiện đại và thân thiện?',
+        content: 'Nội dung chi tiết về tư duy thiết kế UI/UX hiện đại...'
+    },
+    {
+        id: '3',
+        title: 'Kinh nghiệm phỏng vấn Front-end Developer',
+        thumbnail: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=250&fit=crop',
+        category: 'Kinh nghiệm',
+        author: 'Lê Văn C',
+        date: '2024-05-20',
+        excerpt: 'Chia sẻ kinh nghiệm phỏng vấn vị trí Front-end Developer từ các chuyên gia...',
+        content: 'Nội dung chi tiết về kinh nghiệm phỏng vấn Front-end Developer...'
+    },
+    {
+        id: '4',
+        title: 'Công nghệ AI và ứng dụng thực tế',
+        thumbnail: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=400&h=250&fit=crop',
+        category: 'Công nghệ',
+        author: 'Phạm Thị D',
+        date: '2024-05-15',
+        excerpt: 'AI đang thay đổi thế giới như thế nào? Ứng dụng thực tế của AI trong đời sống...',
+        content: 'Nội dung chi tiết về công nghệ AI và ứng dụng thực tế...'
+    },
+    {
+        id: '5',
+        title: 'Bí quyết tự học hiệu quả',
+        thumbnail: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?w=400&h=250&fit=crop',
+        category: 'Học tập',
+        author: 'Nguyễn Văn E',
+        date: '2024-05-10',
+        excerpt: 'Làm sao để tự học hiệu quả? Những bí quyết giúp bạn học tập chủ động và thành công...',
+        content: 'Nội dung chi tiết về bí quyết tự học hiệu quả...'
+    },
 ]; 

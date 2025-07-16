@@ -1,17 +1,32 @@
 import React from 'react';
+import { useCart } from '../../context/CartContext';
 import type { ProductCardProps } from '../../interface/Product.interface';
-
 
 const ProductCard: React.FC<ProductCardProps> = ({
     product,
     onViewDetails,
     onToggleLike
 }) => {
+    const { addToCart } = useCart();
+
     const formatPrice = (price: number) => {
         return new Intl.NumberFormat('vi-VN', {
             style: 'currency',
             currency: 'VND'
         }).format(price);
+    };
+
+    const handleAddToCart = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        addToCart({
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            image: product.image,
+        });
+
+        // Show success message (you can replace this with a proper notification system)
+        console.log(`Đã thêm "${product.name}" vào giỏ hàng!`);
     };
 
     return (
@@ -68,12 +83,20 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
                 <div className="product-card__footer">
                     <div className="product-card__price">{formatPrice(product.price)}</div>
-                    <button
-                        className="product-card__details-btn"
-                        onClick={() => onViewDetails(product)}
-                    >
-                        Xem chi tiết
-                    </button>
+                    <div className="product-card__actions">
+                        <button
+                            className="product-card__add-to-cart-btn"
+                            onClick={handleAddToCart}
+                        >
+                            Thêm vào giỏ
+                        </button>
+                        <button
+                            className="product-card__details-btn"
+                            onClick={() => onViewDetails(product)}
+                        >
+                            Xem chi tiết
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

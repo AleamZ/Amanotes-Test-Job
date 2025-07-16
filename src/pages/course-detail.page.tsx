@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Button, Tag, Rate, Divider, Card, Row, Col, Collapse } from 'antd';
-import { ArrowLeftOutlined, ClockCircleOutlined, UserOutlined, StarOutlined } from '@ant-design/icons';
+import { Button, Tag, Rate, Divider, Card, Row, Col, Collapse, message } from 'antd';
+import { ArrowLeftOutlined, ClockCircleOutlined, UserOutlined, StarOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import { mockProducts } from '../services/mockData';
+import { useCart } from '../context/CartContext';
+import { usePurchasedCourses } from '../context/PurchasedCoursesContext';
 // import './course-detail.page.scss';
 
 const { Panel } = Collapse;
@@ -10,7 +12,14 @@ const { Panel } = Collapse;
 const CourseDetail: React.FC = () => {
     const { id } = useParams();
     const navigate = useNavigate();
+    const { addToCart } = useCart();
+    const { isCoursePurchased, getPurchasedCourse, updateLastAccessed } = usePurchasedCourses();
     const course = mockProducts.find(c => c.id === id);
+
+    // Scroll to top when component mounts
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     if (!course) {
         return (
@@ -32,6 +41,34 @@ const CourseDetail: React.FC = () => {
         }).format(price);
     };
 
+    const handleAddToCart = () => {
+        addToCart({
+            id: course.id,
+            name: course.name,
+            price: course.price,
+            image: course.image,
+        });
+        message.success(`Đã thêm "${course.name}" vào giỏ hàng!`);
+    };
+
+    const handleEnroll = () => {
+        // Add to cart and navigate to checkout
+        handleAddToCart();
+        message.info('Chuyển đến trang thanh toán...');
+        // Navigate to checkout page
+        setTimeout(() => {
+            navigate('/checkout');
+        }, 1000);
+    };
+
+    const handleContinueLearning = () => {
+        updateLastAccessed(course.id);
+        message.info('Chuyển đến nội dung khóa học...');
+    };
+
+    const isPurchased = isCoursePurchased(course.id);
+    const purchasedCourse = getPurchasedCourse(course.id);
+
     return (
         <div className="course-detail-page">
             {/* Header */}
@@ -52,53 +89,104 @@ const CourseDetail: React.FC = () => {
                         <div className="course-image-container">
                             <img src={course.image} alt={course.name} className="course-image" />
                             <div className="course-overlay">
-                                <Button type="primary" size="large" className="enroll-btn">
+                                <Button
+                                    type="primary"
+                                    size="large"
+                                    className="enroll-btn"
+                                    onClick={handleEnroll}
+                                >
                                     Đăng ký khóa học
                                 </Button>
                             </div>
                         </div>
                     </Col>
                     <Col xs={24} md={14}>
-                        <div className="course-info">
-                            <Tag color="blue" className="category-tag">{course.category}</Tag>
-                            <h1 className="course-title">{course.name}</h1>
-                            <p className="course-description">{course.shortDescription}</p>
+                        <div className="course-info" style={{ display: 'flex', gap: 32 }}>
+                            <div className="course-info-main" style={{ flex: 1 }}>
+                                <Tag color="blue" className="category-tag">{course.category}</Tag>
+                                <h1 className="course-title">{course.name}</h1>
+                                <p className="course-description">{course.shortDescription}</p>
 
-                            <div className="course-meta">
-                                <div className="meta-item">
-                                    <UserOutlined />
-                                    <span>Giảng viên: {course.instructor}</span>
+                                <div className="course-meta">
+                                    <div className="meta-item">
+                                        <UserOutlined />
+                                        <span>Giảng viên: {course.instructor}</span>
+                                    </div>
+                                    <div className="meta-item">
+                                        <ClockCircleOutlined />
+                                        <span>Thời lượng: {course.duration}</span>
+                                    </div>
+                                    <div className="meta-item">
+                                        <StarOutlined />
+                                        <span>Trình độ: {course.level}</span>
+                                    </div>
                                 </div>
-                                <div className="meta-item">
-                                    <ClockCircleOutlined />
-                                    <span>Thời lượng: {course.duration}</span>
-                                </div>
-                                <div className="meta-item">
-                                    <StarOutlined />
-                                    <span>Trình độ: {course.level}</span>
-                                </div>
-                            </div>
 
-                            <div className="course-rating">
-                                <Rate disabled defaultValue={course.rating} />
-                                <span className="rating-text">
-                                    {course.rating} ({course.reviews} đánh giá)
-                                </span>
-                            </div>
-
-                            <div className="course-price">
-                                <span className="price">{formatPrice(course.price)}</span>
-                                {course.price > 0 && (
-                                    <span className="original-price">
-                                        {formatPrice(course.price * 1.2)}
+                                <div className="course-rating">
+                                    <Rate disabled defaultValue={course.rating} />
+                                    <span className="rating-text">
+                                        {course.rating} ({course.reviews} đánh giá)
                                     </span>
-                                )}
-                            </div>
+                                </div>
 
-                            <div className="course-tags">
-                                {course.tags.map((tag, index) => (
-                                    <Tag key={index} color="default">{tag}</Tag>
-                                ))}
+                                <div className="course-price">
+                                    <span className="price">{formatPrice(course.price)}</span>
+                                    {course.price > 0 && (
+                                        <span className="original-price">
+                                            {formatPrice(course.price * 1.2)}
+                                        </span>
+                                    )}
+                                </div>
+
+                                <div className="course-tags">
+                                    {course.tags.map((tag, index) => (
+                                        <Tag key={index} color="default">{tag}</Tag>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className="course-info-actions" style={{ minWidth: 180, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 16 }}>
+                                {isPurchased ? (
+                                    <>
+                                        <Button
+                                            type="primary"
+                                            size="large"
+                                            className="continue-btn"
+                                            style={{ width: '100%' }}
+                                            onClick={handleContinueLearning}
+                                        >
+                                            Tiếp tục học
+                                        </Button>
+                                        {purchasedCourse && (
+                                            <div style={{ textAlign: 'center', padding: '8px', background: '#f6ffed', border: '1px solid #b7eb8f', borderRadius: '6px' }}>
+                                                <div style={{ fontSize: '12px', color: '#52c41a', fontWeight: 'bold' }}>
+                                                    Tiến độ: {purchasedCourse.progress}%
+                                                </div>
+                                            </div>
+                                        )}
+                                    </>
+                                ) : (
+                                    <>
+                                        <Button
+                                            type="primary"
+                                            size="large"
+                                            className="enroll-btn"
+                                            style={{ width: '100%' }}
+                                            onClick={handleEnroll}
+                                        >
+                                            Đăng ký khóa học
+                                        </Button>
+                                        <Button
+                                            type="default"
+                                            size="large"
+                                            className="add-cart-btn"
+                                            style={{ width: '100%' }}
+                                            icon={<ShoppingCartOutlined />}
+                                            onClick={handleAddToCart}
+                                        >
+                                            Bỏ vào giỏ hàng
+                                        </Button>
+                                    </>
+                                )}
                             </div>
                         </div>
                     </Col>

@@ -4,17 +4,15 @@ import {
     HomeOutlined,
     CompassOutlined,
     FileTextOutlined,
-    BellOutlined,
     FilterOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Layout, Menu, theme, Drawer, Checkbox } from 'antd';
+import { Layout, Menu, Drawer } from 'antd';
 import Header from '../components/Header/Header';
 import Logo from '../components/Logo/Logo';
 import FilterBar from '../components/FilterBar/FilterBar';
 import ChatBox from '../components/ChatBox/ChatBox';
 import { useFilter } from '../context/FilterContext';
-import './MainLayout.scss';
 
 const { Content, Footer, Sider } = Layout;
 
@@ -38,7 +36,6 @@ const items: MenuItem[] = [
     getItem('Trang Chủ', 'home', <HomeOutlined />),
     getItem('Lộ Trình', 'roadmap', <CompassOutlined />),
     getItem('Bài Viết', 'posts', <FileTextOutlined />),
-    getItem('Thông Báo', 'notifications', <BellOutlined />),
     getItem('Bộ Lọc', 'filter', <FilterOutlined />),
 ];
 

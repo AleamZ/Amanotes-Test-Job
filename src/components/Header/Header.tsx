@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Layout, Avatar, Badge, Space, Dropdown, Switch } from 'antd';
+import React, { useState } from 'react';
+import { Layout, Avatar, Badge, Space, Dropdown } from 'antd';
+import { useNavigate } from 'react-router-dom';
 import {
     BellOutlined,
     UserOutlined,
@@ -7,21 +8,26 @@ import {
     EditOutlined,
     BookOutlined,
     SaveOutlined,
-    LogoutOutlined
+    LogoutOutlined,
+    ShoppingCartOutlined,
+    DeleteOutlined,
+    PlayCircleOutlined
 } from '@ant-design/icons';
 import NotificationDropdown from './NotificationDropdown';
 import SearchBox from '../SearchBox/SearchBox';
+import { useCart } from '../../context/CartContext';
 import type { HeaderProps } from '../../interface/Header.interface';
 import type { Notification } from '../../interface/Notification.interface';
 
 const { Header: AntHeader } = Layout;
 
-
-
 const Header: React.FC<HeaderProps> = ({
     onSearchChange,
     searchTerm,
 }) => {
+    const navigate = useNavigate();
+    const { cartItems, removeFromCart, getCartItemCount, getCartTotal, isCartBouncing } = useCart();
+
     // State for notifications
     const [notifications, setNotifications] = useState<Notification[]>([
         {
@@ -90,19 +96,6 @@ const Header: React.FC<HeaderProps> = ({
     // Get unread count
     const unreadCount = notifications.filter(n => !n.isRead).length;
 
-    const [darkMode, setDarkMode] = useState(() => {
-        return localStorage.getItem('darkMode') === 'true';
-    });
-
-    useEffect(() => {
-        if (darkMode) {
-            document.body.classList.add('dark-mode');
-        } else {
-            document.body.classList.remove('dark-mode');
-        }
-        localStorage.setItem('darkMode', darkMode ? 'true' : 'false');
-    }, [darkMode]);
-
     const avatarMenuItems = {
         items: [
             {
@@ -138,6 +131,15 @@ const Header: React.FC<HeaderProps> = ({
                     <div className="menu-item">
                         <BookOutlined />
                         <span>Bài viết của tôi</span>
+                    </div>
+                ),
+            },
+            {
+                key: 'my-courses',
+                label: (
+                    <div className="menu-item">
+                        <PlayCircleOutlined />
+                        <span>Khóa học hiện tại</span>
                     </div>
                 ),
             },
@@ -182,6 +184,9 @@ const Header: React.FC<HeaderProps> = ({
             case 'my-posts':
                 // Handle my posts click
                 break;
+            case 'my-courses':
+                navigate('/my-courses');
+                break;
             case 'saved-posts':
                 // Handle saved posts click
                 break;
@@ -195,6 +200,57 @@ const Header: React.FC<HeaderProps> = ({
                 break;
         }
     };
+
+    const handleCheckout = () => {
+        navigate('/checkout');
+    };
+
+    const cartDropdownContent = (
+        <div className="cart-dropdown">
+            <div className="cart-header">
+                <h3>Giỏ hàng ({getCartItemCount()} sản phẩm)</h3>
+            </div>
+            {cartItems.length === 0 ? (
+                <div className="empty-cart">
+                    <ShoppingCartOutlined style={{ fontSize: '48px', color: '#ccc' }} />
+                    <p>Giỏ hàng trống</p>
+                </div>
+            ) : (
+                <>
+                    <div className="cart-items">
+                        {cartItems.map((item) => (
+                            <div key={item.id} className="cart-item">
+                                <img src={item.image} alt={item.name} />
+                                <div className="item-info">
+                                    <h4>{item.name}</h4>
+                                    <p className="item-price">
+                                        {item.price.toLocaleString('vi-VN')}đ x {item.quantity}
+                                    </p>
+                                </div>
+                                <button
+                                    className="remove-item"
+                                    onClick={() => removeFromCart(item.id)}
+                                >
+                                    <DeleteOutlined />
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="cart-footer">
+                        <div className="cart-total">
+                            <span>Tổng cộng:</span>
+                            <span className="total-price">
+                                {getCartTotal().toLocaleString('vi-VN')}đ
+                            </span>
+                        </div>
+                        <button className="checkout-btn" onClick={handleCheckout}>
+                            Thanh toán
+                        </button>
+                    </div>
+                </>
+            )}
+        </div>
+    );
 
     return (
         <AntHeader className="site-header" style={{ background: '#fff', padding: '0 24px' }}>
@@ -212,13 +268,21 @@ const Header: React.FC<HeaderProps> = ({
                 {/* Right Actions */}
                 <div className="right-actions">
                     <Space size={16}>
-                        <Switch
-                            checked={darkMode}
-                            onChange={setDarkMode}
-                            checkedChildren="🌙"
-                            unCheckedChildren="☀️"
-                            style={{ background: darkMode ? '#001529' : '#f0f0f0' }}
-                        />
+                        {/* Cart */}
+                        <Dropdown
+                            dropdownRender={() => cartDropdownContent}
+                            trigger={['click']}
+                            placement="bottomRight"
+                            overlayClassName="cart-dropdown-overlay"
+                        >
+                            <div className={`cart-icon-wrapper ${isCartBouncing ? 'cart-bounce' : ''}`}>
+                                <Badge count={getCartItemCount()} size="small">
+                                    <ShoppingCartOutlined style={{ fontSize: '20px', cursor: 'pointer' }} />
+                                </Badge>
+                            </div>
+                        </Dropdown>
+
+                        {/* Notifications */}
                         <Dropdown
                             dropdownRender={() => (
                                 <NotificationDropdown
@@ -237,8 +301,13 @@ const Header: React.FC<HeaderProps> = ({
                                 </Badge>
                             </div>
                         </Dropdown>
+
+                        {/* User Avatar */}
                         <Dropdown
-                            menu={avatarMenuItems}
+                            menu={{
+                                ...avatarMenuItems,
+                                onClick: ({ key }) => handleMenuClick(key)
+                            }}
                             trigger={['click']}
                             placement="bottomRight"
                             overlayClassName="avatar-dropdown"

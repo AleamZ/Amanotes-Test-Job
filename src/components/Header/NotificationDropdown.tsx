@@ -7,13 +7,8 @@ import {
     StarOutlined,
     CheckOutlined
 } from '@ant-design/icons';
-import type { Notification } from '../../interface/Notification.interface';
+import type { NotificationDropdownProps } from '../../interface/Notification.interface';
 
-interface NotificationDropdownProps {
-    notifications: Notification[];
-    onMarkAsRead: (id: string) => void;
-    onMarkAllAsRead: () => void;
-}
 
 const NotificationDropdown: React.FC<NotificationDropdownProps> = ({
     notifications,

@@ -1,0 +1,313 @@
+.checkout-page {
+    min-height: 100vh;
+    background: #f5f7fa;
+    padding: 24px;
+
+    .checkout-header {
+        margin-bottom: 32px;
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            color: #1890ff;
+            border: none;
+            background: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background: rgba(24, 144, 255, 0.1);
+                color: #40a9ff;
+            }
+        }
+    }
+
+    .checkout-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+    }
+
+    .checkout-steps {
+        padding: 32px 32px 0;
+        background: #fafbfc;
+        border-bottom: 1px solid #f0f0f0;
+
+        .ant-steps-item {
+            .ant-steps-item-icon {
+                background: #1890ff;
+                border-color: #1890ff;
+            }
+
+            &.ant-steps-item-process {
+                .ant-steps-item-icon {
+                    background: #1890ff;
+                    border-color: #1890ff;
+                }
+            }
+
+            &.ant-steps-item-finish {
+                .ant-steps-item-icon {
+                    background: #52c41a;
+                    border-color: #52c41a;
+                }
+            }
+        }
+    }
+
+    .checkout-content {
+        padding: 32px;
+        min-height: 500px;
+    }
+
+    // Cart Step Styles
+    .checkout-cart {
+        .empty-cart {
+            text-align: center;
+            padding: 48px 24px;
+
+            .empty-cart-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
+
+                .ant-typography {
+                    font-size: 16px;
+                }
+            }
+        }
+
+        .cart-items {
+            .cart-item {
+                margin-bottom: 16px;
+                border-radius: 8px;
+                border: 1px solid #f0f0f0;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                }
+
+                .item-image {
+                    width: 100%;
+                    height: 80px;
+                    object-fit: cover;
+                    border-radius: 6px;
+                }
+
+                .item-info {
+                    .item-title {
+                        margin: 0 0 8px 0;
+                        font-size: 16px;
+                        color: #262626;
+                    }
+                }
+
+                .item-price {
+                    text-align: right;
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+
+    // Payment Step Styles
+    .checkout-payment {
+        .form-card {
+            margin-bottom: 24px;
+            border-radius: 8px;
+            border: 1px solid #f0f0f0;
+
+            .ant-card-head {
+                border-bottom: 1px solid #f0f0f0;
+                padding: 16px 24px;
+
+                .ant-card-head-title {
+                    font-size: 18px;
+                    font-weight: 600;
+                    color: #262626;
+                }
+            }
+
+            .ant-card-body {
+                padding: 24px;
+            }
+
+            .credit-card-form {
+                margin-top: 16px;
+                padding: 16px;
+                background: #fafbfc;
+                border-radius: 6px;
+                border: 1px solid #e8e8e8;
+            }
+        }
+
+        .summary-card {
+            position: sticky;
+            top: 24px;
+            border-radius: 8px;
+            border: 1px solid #f0f0f0;
+
+            .ant-card-head {
+                border-bottom: 1px solid #f0f0f0;
+                padding: 16px 20px;
+
+                .ant-card-head-title {
+                    font-size: 16px;
+                    font-weight: 600;
+                    color: #262626;
+                }
+            }
+
+            .ant-card-body {
+                padding: 20px;
+            }
+
+            .order-summary {
+                .summary-item {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 12px;
+                    font-size: 14px;
+
+                    &.total {
+                        font-size: 16px;
+                        margin-top: 16px;
+                        padding-top: 16px;
+                        border-top: 1px solid #f0f0f0;
+                    }
+                }
+            }
+        }
+    }
+
+    // Success Step Styles
+    .checkout-success {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 400px;
+
+        .success-content {
+            text-align: center;
+            max-width: 500px;
+
+            .success-icon {
+                font-size: 64px;
+                color: #52c41a;
+                margin-bottom: 24px;
+            }
+
+            .ant-typography {
+                margin-bottom: 24px;
+            }
+
+            .success-actions {
+                margin-top: 32px;
+            }
+        }
+    }
+
+    .checkout-actions {
+        padding: 24px 32px;
+        background: #fafbfc;
+        border-top: 1px solid #f0f0f0;
+        display: flex;
+        justify-content: flex-end;
+
+        .ant-space {
+            .ant-btn {
+                min-width: 120px;
+                height: 40px;
+                font-weight: 500;
+            }
+        }
+    }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+    .checkout-page {
+        padding: 16px;
+
+        .checkout-steps {
+            padding: 24px 16px 0;
+
+            .ant-steps-item-title {
+                display: none;
+            }
+        }
+
+        .checkout-content {
+            padding: 24px 16px;
+        }
+
+        .checkout-payment {
+            .form-card {
+                .ant-card-body {
+                    padding: 16px;
+                }
+            }
+
+            .summary-card {
+                position: static;
+                margin-top: 24px;
+            }
+        }
+
+        .checkout-actions {
+            padding: 16px;
+            flex-direction: column;
+            gap: 12px;
+
+            .ant-space {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    }
+}
+
+// Dark theme support (if needed)
+@media (prefers-color-scheme: dark) {
+    .checkout-page {
+        background: #141414;
+
+        .checkout-container {
+            background: #1f1f1f;
+            border: 1px solid #303030;
+        }
+
+        .checkout-steps {
+            background: #262626;
+            border-bottom-color: #303030;
+        }
+
+        .checkout-content {
+            background: #1f1f1f;
+        }
+
+        .form-card,
+        .summary-card {
+            background: #262626;
+            border-color: #303030;
+
+            .ant-card-head {
+                border-bottom-color: #303030;
+            }
+        }
+
+        .checkout-actions {
+            background: #262626;
+            border-top-color: #303030;
+        }
+    }
+}

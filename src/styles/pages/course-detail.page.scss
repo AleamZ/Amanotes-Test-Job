@@ -48,6 +48,17 @@
                     font-size: 16px;
                     padding: 12px 24px;
                     height: auto;
+                    background: #1890ff;
+                    border-color: #1890ff;
+                    font-weight: 600;
+                    transition: all 0.3s ease;
+
+                    &:hover {
+                        background: #40a9ff;
+                        border-color: #40a9ff;
+                        transform: translateY(-2px);
+                        box-shadow: 0 4px 12px rgba(24, 144, 255, 0.4);
+                    }
                 }
             }
 
@@ -137,6 +148,54 @@
                     margin-bottom: 8px;
                     padding: 4px 12px;
                     border-radius: 6px;
+                }
+            }
+
+            .course-info-actions {
+                .enroll-btn {
+                    background: #1890ff;
+                    border-color: #1890ff;
+                    font-weight: 600;
+                    transition: all 0.3s ease;
+                    height: 48px;
+                    font-size: 16px;
+
+                    &:hover {
+                        background: #40a9ff;
+                        border-color: #40a9ff;
+                        transform: translateY(-2px);
+                        box-shadow: 0 4px 12px rgba(24, 144, 255, 0.4);
+                    }
+
+                    &:active {
+                        transform: translateY(0);
+                    }
+                }
+
+                .add-cart-btn {
+                    background: #27ae60;
+                    border-color: #27ae60;
+                    color: white;
+                    font-weight: 600;
+                    transition: all 0.3s ease;
+                    height: 48px;
+                    font-size: 16px;
+
+                    &:hover {
+                        background: #2ecc71;
+                        border-color: #2ecc71;
+                        color: white;
+                        transform: translateY(-2px);
+                        box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
+                    }
+
+                    &:active {
+                        transform: translateY(0);
+                    }
+
+                    .anticon {
+                        margin-right: 8px;
+                    }
                 }
             }
         }
@@ -346,6 +405,11 @@
 
                 .course-title {
                     font-size: 24px;
+                }
+
+                .course-info-actions {
+                    min-width: 100% !important;
+                    margin-top: 24px;
                 }
             }
         }

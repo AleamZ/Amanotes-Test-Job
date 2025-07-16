@@ -1,20 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { mockProducts } from '../services/mockData';
-import type { Product } from '../interface/Product.interface';
-
-interface SearchParams {
-    query: string;
-    category?: string;
-    level?: string;
-    minPrice?: number;
-    maxPrice?: number;
-}
-
-interface SearchResult {
-    products: Product[];
-    total: number;
-    hasMore: boolean;
-}
+import type { SearchParams, SearchResult } from '../interface/SearchBox.interface';
 
 // Simulate API call with delay
 const searchProducts = async (params: SearchParams): Promise<SearchResult> => {

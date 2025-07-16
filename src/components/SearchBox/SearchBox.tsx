@@ -3,14 +3,8 @@ import { Spin, Empty } from 'antd';
 import { SearchOutlined, ClockCircleOutlined, FireOutlined } from '@ant-design/icons';
 import { useSearchSuggestions, useSearchHistory, saveSearchHistory } from '../../hooks/useSearch';
 import { useNavigate } from 'react-router-dom';
+import type { SearchBoxProps } from '../../interface/SearchBox.interface';
 
-interface SearchBoxProps {
-    value: string;
-    onChange: (value: string) => void;
-    onSearch: (value: string) => void;
-    placeholder?: string;
-    className?: string;
-}
 
 const SearchBox: React.FC<SearchBoxProps> = ({
     value,

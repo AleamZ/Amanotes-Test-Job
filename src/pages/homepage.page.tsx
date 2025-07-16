@@ -4,6 +4,7 @@ import { useFilter } from '../context/FilterContext';
 import { categories, mockProducts } from '../services/mockData';
 import { Tabs, Spin, Empty } from 'antd';
 import { useSearch } from '../hooks/useSearch';
+import Loader from '../components/BasicUI/Loading';
 // import './homepage.page.scss';
 
 const Homepage: React.FC = () => {
@@ -45,12 +46,23 @@ const Homepage: React.FC = () => {
         return categoryCourses;
     };
 
-    if (isLoading) {
+    // State để kiểm soát loading với delay
+    const [showLoading, setShowLoading] = React.useState(true);
+    React.useEffect(() => {
+        if (!isLoading) {
+            const timer = setTimeout(() => setShowLoading(false), 1000); // delay 1s
+            return () => clearTimeout(timer);
+        } else {
+            setShowLoading(true);
+        }
+    }, [isLoading]);
+
+    if (showLoading) {
         return (
-            <div className="homepage">
+            <div className="homepage" style={{ minHeight: '60vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                 <h1>Khóa Học</h1>
-                <div className="loading-container">
-                    <Spin size="large" />
+                <div className="loading-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1 }}>
+                    <Loader />
                     <p>Đang tải khóa học...</p>
                 </div>
             </div>
