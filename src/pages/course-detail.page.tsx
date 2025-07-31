@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Button, Tag, Rate, Divider, Card, Row, Col, Collapse, message } from 'antd';
+import { Button, Tag, Rate, Card, Row, Col, Collapse, message } from 'antd';
 import { ArrowLeftOutlined, ClockCircleOutlined, UserOutlined, StarOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import { mockProducts } from '../services/mockData';
 import { useCart } from '../context/CartContext';

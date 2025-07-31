@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { learningPaths, mockProducts } from '../services/mockData';
-import type { LearningPath } from '../services/mockData';
+// Removed unused import LearningPath
 import '../styles/pages/roadmap-detail.page.scss';
 
 const RoadmapDetailPage: React.FC = () => {

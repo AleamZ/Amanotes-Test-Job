@@ -59,19 +59,7 @@ const ChatBox: React.FC = () => {
         }).format(price);
     };
 
-    const generateCourseSuggestion = (courses: Product[]) => {
-        if (courses.length === 0) return null;
-
-        const course = courses[0];
-        return {
-            id: Date.now().toString(),
-            content: `Tôi đề xuất khóa học "${course.name}" cho bạn:`,
-            sender: 'ai' as const,
-            timestamp: new Date(),
-            type: 'course-suggestion' as const,
-            courseData: course
-        };
-    };
+    // Removed unused function generateCourseSuggestion
 
     const generateCourseLinks = (courses: Product[]) => {
         if (courses.length === 0) return null;

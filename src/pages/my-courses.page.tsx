@@ -10,7 +10,6 @@ import {
     Tag,
     Space,
     Empty,
-    Avatar,
     Divider
 } from 'antd';
 import {

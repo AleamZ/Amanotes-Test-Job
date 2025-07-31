@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
     Button,
     Card,
@@ -27,28 +27,16 @@ import {
 } from '@ant-design/icons';
 import { useCart } from '../context/CartContext';
 import { usePurchasedCourses } from '../context/PurchasedCoursesContext';
-import { mockProducts } from '../services/mockData';
+// Removed unused import mockProducts
 
 const { Title, Text } = Typography;
 const { Option } = Select;
 const { Step } = Steps;
 
-interface CheckoutFormData {
-    fullName: string;
-    email: string;
-    phone: string;
-    address: string;
-    city: string;
-    paymentMethod: string;
-    cardNumber?: string;
-    cardName?: string;
-    expiryDate?: string;
-    cvv?: string;
-}
+// Removed unused interface CheckoutFormData
 
 const CheckoutPage: React.FC = () => {
     const navigate = useNavigate();
-    const location = useLocation();
     const { cartItems, removeFromCart, updateQuantity, getCartTotal, clearCart } = useCart();
     const { addPurchasedCourse } = usePurchasedCourses();
     const [currentStep, setCurrentStep] = useState(0);
@@ -56,8 +44,7 @@ const CheckoutPage: React.FC = () => {
     const [loading, setLoading] = useState(false);
 
     // Check if user came from direct course enrollment
-    const directCourseId = location.state?.courseId;
-    const directCourse = directCourseId ? mockProducts.find(c => c.id === directCourseId) : null;
+    // Removed unused variable directCourseId
 
     useEffect(() => {
         console.log('CheckoutPage mounted');

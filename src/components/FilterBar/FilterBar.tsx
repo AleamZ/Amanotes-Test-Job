@@ -5,8 +5,7 @@ import type { FilterBarProps } from '../../interface/FilterBar.interface';
 
 
 const FilterBar: React.FC<FilterBarProps> = ({
-    isOpen,
-    onClose
+    isOpen
 }) => {
     const { filters, setFilters } = useFilter();
 

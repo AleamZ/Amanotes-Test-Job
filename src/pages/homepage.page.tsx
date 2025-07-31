@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFilter } from '../context/FilterContext';
 import { categories, mockProducts } from '../services/mockData';
-import { Tabs, Spin, Empty } from 'antd';
+import { Tabs, Empty } from 'antd';
 import { useSearch } from '../hooks/useSearch';
 import Loader from '../components/BasicUI/Loading';
 // import './homepage.page.scss';

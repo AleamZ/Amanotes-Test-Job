@@ -1,5 +1,5 @@
-import React, { lazy, Suspense } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import React, { Suspense } from "react";
+import { Routes, Route } from "react-router-dom";
 import Homepage from "../pages/homepage.page";
 import CourseDetail from "../pages/course-detail.page";
 import CheckoutPage from "../pages/checkout.page";
